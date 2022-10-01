@@ -3,7 +3,7 @@ package ds
 import (
 	"fmt"
 	"github.com/go-redis/redis/v9"
-	logger "nsq-demoset/app/_demolib"
+	logger "nsq-demoset/app/_applib"
 	"os"
 )
 

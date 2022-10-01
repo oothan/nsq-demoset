@@ -1,4 +1,4 @@
-package _demolib
+package _applib
 
 import (
 	"go.uber.org/zap"

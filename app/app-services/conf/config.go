@@ -6,7 +6,7 @@ import (
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/joho/godotenv"
 	"io/ioutil"
-	logger "nsq-demoset/app/_demolib"
+	logger "nsq-demoset/app/_applib"
 	"os"
 )
 

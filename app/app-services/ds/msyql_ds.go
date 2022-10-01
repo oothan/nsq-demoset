@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	logger "nsq-demoset/app/_demolib"
+	logger "nsq-demoset/app/_applib"
 	"os"
 )
 
