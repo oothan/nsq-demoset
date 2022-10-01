@@ -4,3 +4,7 @@
 /app/app-services/conf/.env
 /app/app-services/conf/rsa_private.pem
 /app/app-services/conf/rsa_public.pem
+
+/app/nsq-services/conf/.env
+/app/nsq-services/conf/rsa_private.pem
+/app/nsq-services/conf/rsa_public.pem

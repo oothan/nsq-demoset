@@ -10,6 +10,19 @@ type DataSource struct {
 	RDB *redis.Client
 }
 
-func NewDataSource() {
+func NewDataSource() *DataSource {
+	db, err := LoadDB()
+	if err != nil {
+		return nil
+	}
 
+	rdb, err := LoadRDB()
+	if err != nil {
+		return nil
+	}
+
+	return &DataSource{
+		DB:  db,
+		RDB: rdb,
+	}
 }
