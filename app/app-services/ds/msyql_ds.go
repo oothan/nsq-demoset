@@ -5,6 +5,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	logger "nsq-demoset/app/_applib"
+	"nsq-demoset/app/app-services/model"
 	"os"
 )
 
@@ -28,7 +29,10 @@ func LoadDB() (*gorm.DB, error) {
 	logger.Sugar.Info("Successfully connected to database")
 
 	// migrate DB
-	err = db.AutoMigrate()
+	err = db.AutoMigrate(
+		&model.User{},
+		&model.Post{},
+	)
 	if err != nil {
 		return nil, err
 	}

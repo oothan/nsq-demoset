@@ -8,7 +8,7 @@ import (
 	logger "nsq-demoset/app/_applib"
 	"nsq-demoset/app/app-services/cmd/front_api/handler"
 	_ "nsq-demoset/app/app-services/conf"
-	_ds "nsq-demoset/app/nsq-services/ds"
+	_ds "nsq-demoset/app/app-services/ds"
 	"os"
 	"os/signal"
 	"syscall"

@@ -13,9 +13,9 @@ type Post struct {
 	Content      string         `gorm:"column:content;type:text" json:"content"`
 	Status       string         `gorm:"column:status" json:"status"`
 	UserId       uint64         `gorm:"column:user_id" json:"user_id"`
-	ReadCount    int64          `gorm:"column:read_count;default:0" json:"read_count"`
-	LikeCount    int64          `gorm:"column:like_count;default:0" json:"like_count"`
-	CommentCount int64          `gorm:"column:comment_count;default:0" json:"comment_count"`
+	ReadCount    int64          `gorm:"column:read_count;not null;default:0" json:"read_count"`
+	LikeCount    int64          `gorm:"column:like_count;not null;default:0" json:"like_count"`
+	CommentCount int64          `gorm:"column:comment_count;not null;default:0" json:"comment_count"`
 	CreatedAt    time.Time      `gorm:"column:created_at" json:"created_at"`
 	UpdatedAt    time.Time      `gorm:"column:updated_at" json:"updated_at"`
 	DeletedAt    gorm.DeletedAt `gorm:"column:deleted_at" json:"_"`
