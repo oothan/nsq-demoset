@@ -49,9 +49,17 @@ func (ctr *authHandler) Register() {
 	group.POST("/me", ctr.getMe)
 }
 
-/*
- *	@url /api/auth/login
- */
+// @BasePath /api/auth
+
+// PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description User Login
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Login
+// @Router /login [post]
 func (ctr *authHandler) postLogin(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	req := &reqPostLogin{}
@@ -115,9 +123,15 @@ func (ctr *authHandler) postLogin(c *gin.Context) {
 	c.JSON(200, res)
 }
 
-/*
- *	@url	/api/auth/register
- */
+// PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description User Register
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Register
+// @Router /register [post]
 func (ctr *authHandler) postRegister(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	req := &reqPostLogin{}
@@ -157,9 +171,15 @@ func (ctr *authHandler) postRegister(c *gin.Context) {
 	c.JSON(200, res)
 }
 
-/*
- *	@url 	/api/auth/logout
- */
+// PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description User Logout
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Logout
+// @Router /logout [post]
 func (ctr *authHandler) postLogout(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	user := c.MustGet("user").(*model.User)
@@ -197,9 +217,15 @@ func (ctr *authHandler) postLogout(c *gin.Context) {
 	c.JSON(200, res)
 }
 
-/*
- *	@url 	/api/auth/refresh
- */
+// PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description User Refresh
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Refresh
+// @Router /refresh [post]
 func (ctr *authHandler) postRefresh(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	user := c.MustGet("user").(*model.User)
@@ -239,9 +265,15 @@ func (ctr *authHandler) postRefresh(c *gin.Context) {
 	c.JSON(http.StatusOK, res)
 }
 
-/*
- *	@url 	/api/auth/me
- */
+// PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description User Me
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Me
+// @Router /me [post]
 func (ctr *authHandler) getMe(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	user := c.MustGet("user").(*model.User)

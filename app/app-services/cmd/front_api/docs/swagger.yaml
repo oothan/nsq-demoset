@@ -1,0 +1,103 @@
+basePath: /
+info:
+  contact: {}
+  description: application description
+  title: App
+  version: "0.1"
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      description: Home
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - example
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: User Login
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - example
+  /logout:
+    post:
+      consumes:
+      - application/json
+      description: User Logout
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - example
+  /me:
+    post:
+      consumes:
+      - application/json
+      description: User Me
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - example
+  /refresh:
+    post:
+      consumes:
+      - application/json
+      description: User Refresh
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - example
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: User Register
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - example
+securityDefinitions:
+  Token:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

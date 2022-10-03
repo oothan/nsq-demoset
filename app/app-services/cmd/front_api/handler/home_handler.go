@@ -15,8 +15,16 @@ func NewHomeHandler(h *Handler) *homeHandler {
 	}
 }
 
+// Register PingExample godoc
+// @Summary ping example
+// @Schemes
+// @Description Home
+// @Tags example
+// @Accept json
+// @Produce json
+// @Success 200 {string} Welcome
+// @router / [get]
 func (ctr *homeHandler) Register() {
-	//ctr.R.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	ctr.R.GET("/", ctr.welcome)
 }
 
