@@ -1,4 +1,4 @@
-package _applib
+package utils
 
 import (
 	"encoding/hex"
