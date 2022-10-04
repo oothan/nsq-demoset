@@ -8,3 +8,6 @@
 /app/nsq-services/conf/.env
 /app/nsq-services/conf/rsa_private.pem
 /app/nsq-services/conf/rsa_public.pem
+
+/logs/appnsq.log
+/logs/appnsq.log
