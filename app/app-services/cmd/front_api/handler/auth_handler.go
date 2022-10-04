@@ -49,17 +49,16 @@ func (ctr *authHandler) Register() {
 	group.POST("/me", ctr.getMe)
 }
 
-// @BasePath /api/auth
-
 // PingExample godoc
 // @Summary ping example
 // @Schemes
 // @Description User Login
-// @Tags example
+// @Tags Users
+// @Param email   path      string  true  "Email"
+// @Param password   path      string  true  "Password"
 // @Accept json
 // @Produce json
-// @Success 200 {string} Login
-// @Router /login [post]
+// @Router /api/auth/login [post]
 func (ctr *authHandler) postLogin(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	req := &reqPostLogin{}
@@ -127,11 +126,10 @@ func (ctr *authHandler) postLogin(c *gin.Context) {
 // @Summary ping example
 // @Schemes
 // @Description User Register
-// @Tags example
+// @Tags Users
 // @Accept json
 // @Produce json
-// @Success 200 {string} Register
-// @Router /register [post]
+// @Router /api/auth/register [post]
 func (ctr *authHandler) postRegister(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	req := &reqPostLogin{}
@@ -175,11 +173,10 @@ func (ctr *authHandler) postRegister(c *gin.Context) {
 // @Summary ping example
 // @Schemes
 // @Description User Logout
-// @Tags example
+// @Tags Users
 // @Accept json
 // @Produce json
-// @Success 200 {string} Logout
-// @Router /logout [post]
+// @Router /api/auth/logout [post]
 func (ctr *authHandler) postLogout(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	user := c.MustGet("user").(*model.User)
@@ -221,11 +218,10 @@ func (ctr *authHandler) postLogout(c *gin.Context) {
 // @Summary ping example
 // @Schemes
 // @Description User Refresh
-// @Tags example
+// @Tags Users
 // @Accept json
 // @Produce json
-// @Success 200 {string} Refresh
-// @Router /refresh [post]
+// @Router /api/auth/refresh [post]
 func (ctr *authHandler) postRefresh(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	user := c.MustGet("user").(*model.User)
@@ -266,14 +262,11 @@ func (ctr *authHandler) postRefresh(c *gin.Context) {
 }
 
 // PingExample godoc
-// @Summary ping example
-// @Schemes
-// @Description User Me
-// @Tags example
-// @Accept json
+// @Summary show User
+// @Description User
+// @Tags Users
 // @Produce json
-// @Success 200 {string} Me
-// @Router /me [post]
+// @Router /api/auth/me [post]
 func (ctr *authHandler) getMe(c *gin.Context) {
 	res := &appresponse.ResponseObj{}
 	user := c.MustGet("user").(*model.User)

@@ -4,8 +4,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 	"net/http"
 	logger "nsq-demoset/app/_applib"
 	_ "nsq-demoset/app/app-services/cmd/front_api/docs"
@@ -31,7 +29,7 @@ func main() {
 
 	// server
 	router := gin.Default()
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	//router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	h := handler.NewHandler(&handler.HConfig{
 		R:  router,
 		DS: ds,

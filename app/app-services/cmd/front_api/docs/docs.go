@@ -26,20 +26,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "example"
+                    "Home"
                 ],
                 "summary": "ping example",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                "responses": {}
             }
         },
-        "/login": {
+        "/api/auth/login": {
             "post": {
                 "description": "User Login",
                 "consumes": [
@@ -49,20 +42,29 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "example"
+                    "Users"
                 ],
                 "summary": "ping example",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Email",
+                        "name": "email",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Password",
+                        "name": "password",
+                        "in": "path",
+                        "required": true
                     }
-                }
+                ],
+                "responses": {}
             }
         },
-        "/logout": {
+        "/api/auth/logout": {
             "post": {
                 "description": "User Logout",
                 "consumes": [
@@ -72,43 +74,26 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "example"
+                    "Users"
                 ],
                 "summary": "ping example",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                "responses": {}
             }
         },
-        "/me": {
+        "/api/auth/me": {
             "post": {
-                "description": "User Me",
-                "consumes": [
-                    "application/json"
-                ],
+                "description": "User",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "example"
+                    "Users"
                 ],
-                "summary": "ping example",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                "summary": "show User",
+                "responses": {}
             }
         },
-        "/refresh": {
+        "/api/auth/refresh": {
             "post": {
                 "description": "User Refresh",
                 "consumes": [
@@ -118,20 +103,13 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "example"
+                    "Users"
                 ],
                 "summary": "ping example",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                "responses": {}
             }
         },
-        "/register": {
+        "/api/auth/register": {
             "post": {
                 "description": "User Register",
                 "consumes": [
@@ -141,17 +119,10 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "example"
+                    "Users"
                 ],
                 "summary": "ping example",
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
+                "responses": {}
             }
         }
     },

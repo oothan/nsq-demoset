@@ -5,8 +5,8 @@ import (
 	"github.com/go-redis/redis/v9"
 	"gorm.io/gorm"
 	"nsq-demoset/app/app-services/cmd/front_api/criteria"
+	"nsq-demoset/app/app-services/ds"
 	"nsq-demoset/app/app-services/model"
-	"nsq-demoset/app/nsq-services/ds"
 )
 
 type postRepository struct {

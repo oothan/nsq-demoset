@@ -19,10 +19,9 @@ func NewHomeHandler(h *Handler) *homeHandler {
 // @Summary ping example
 // @Schemes
 // @Description Home
-// @Tags example
+// @Tags Home
 // @Accept json
 // @Produce json
-// @Success 200 {string} Welcome
 // @router / [get]
 func (ctr *homeHandler) Register() {
 	ctr.R.GET("/", ctr.welcome)

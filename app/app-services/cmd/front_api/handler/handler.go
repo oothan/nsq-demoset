@@ -14,6 +14,7 @@ type Handler struct {
 
 	userScv  model.UserService
 	tokenScv model.TokenService
+	postScv  model.PostService
 }
 
 type HConfig struct {
@@ -35,10 +36,17 @@ func NewHandler(c *HConfig) *Handler {
 		UserRepo: userRepo,
 	})
 
+	// post repo
+	postRepo := repository.NewPostRepository(c.DS)
+	postService := service.NewPostService(&service.PostConfig{
+		PostRepo: postRepo,
+	})
+
 	return &Handler{
 		R:        c.R,
 		userScv:  userService,
 		tokenScv: tokenService,
+		postScv:  postService,
 	}
 }
 
@@ -53,5 +61,9 @@ func (h *Handler) Register() {
 	// auth
 	authHandler := NewAuthHandler(h)
 	authHandler.Register()
+
+	// post
+	postHandler := NewPostHandler(h)
+	postHandler.Register()
 
 }

@@ -12,89 +12,74 @@ paths:
       description: Home
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
+      responses: {}
       summary: ping example
       tags:
-      - example
-  /login:
+      - Home
+  /api/auth/login:
     post:
       consumes:
       - application/json
       description: User Login
+      parameters:
+      - description: Email
+        in: path
+        name: email
+        required: true
+        type: string
+      - description: Password
+        in: path
+        name: password
+        required: true
+        type: string
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
+      responses: {}
       summary: ping example
       tags:
-      - example
-  /logout:
+      - Users
+  /api/auth/logout:
     post:
       consumes:
       - application/json
       description: User Logout
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
+      responses: {}
       summary: ping example
       tags:
-      - example
-  /me:
+      - Users
+  /api/auth/me:
     post:
-      consumes:
-      - application/json
-      description: User Me
+      description: User
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
-      summary: ping example
+      responses: {}
+      summary: show User
       tags:
-      - example
-  /refresh:
+      - Users
+  /api/auth/refresh:
     post:
       consumes:
       - application/json
       description: User Refresh
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
+      responses: {}
       summary: ping example
       tags:
-      - example
-  /register:
+      - Users
+  /api/auth/register:
     post:
       consumes:
       - application/json
       description: User Register
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
+      responses: {}
       summary: ping example
       tags:
-      - example
+      - Users
 securityDefinitions:
   Token:
     in: header
