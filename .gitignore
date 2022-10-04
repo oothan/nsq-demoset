@@ -10,4 +10,4 @@
 /app/nsq-services/conf/rsa_public.pem
 
 /logs/appnsq.log
-/logs/appnsq.log
+/logs/appsvc.log
