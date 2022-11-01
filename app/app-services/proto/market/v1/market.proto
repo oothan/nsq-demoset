@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package="app/app-services/proto/market/v1;marketpb";
+
+enum Coin {
+  ALL = 0;
+  BTC = 1;
+  ETH = 2;
+  TRX = 3;
+  USDT = 4;
+}
+
+message MarketRequest {
+  Coin coin = 1;
+}
+
+message MarketResponse {
+  string symbol = 1;
+  string open_price = 2;
+  string close_price = 3;
+  string last_price = 4;
+  string price_change = 5;
+  string price_change_percent = 6;
+}
+
+message PriceRequest {
+  string symbol = 1;
+}
+
+message PriceResponse {
+  string symbol = 1;
+  string price = 2;
+}
+
+service Market {
+  rpc GetPrice(PriceRequest) returns (PriceResponse);
+  rpc Subscribe(MarketRequest) returns (MarketResponse);
+}
