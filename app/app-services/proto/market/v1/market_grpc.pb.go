@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MarketClient interface {
 	GetPrice(ctx context.Context, in *PriceRequest, opts ...grpc.CallOption) (*PriceResponse, error)
-	Subscribe(ctx context.Context, in *MarketRequest, opts ...grpc.CallOption) (*MarketResponse, error)
+	Subscribe(ctx context.Context, in *MarketRequest, opts ...grpc.CallOption) (Market_SubscribeClient, error)
 }
 
 type marketClient struct {
@@ -43,13 +43,36 @@ func (c *marketClient) GetPrice(ctx context.Context, in *PriceRequest, opts ...g
 	return out, nil
 }
 
-func (c *marketClient) Subscribe(ctx context.Context, in *MarketRequest, opts ...grpc.CallOption) (*MarketResponse, error) {
-	out := new(MarketResponse)
-	err := c.cc.Invoke(ctx, "/Market/Subscribe", in, out, opts...)
+func (c *marketClient) Subscribe(ctx context.Context, in *MarketRequest, opts ...grpc.CallOption) (Market_SubscribeClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Market_ServiceDesc.Streams[0], "/Market/Subscribe", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &marketSubscribeClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Market_SubscribeClient interface {
+	Recv() (*MarketResponse, error)
+	grpc.ClientStream
+}
+
+type marketSubscribeClient struct {
+	grpc.ClientStream
+}
+
+func (x *marketSubscribeClient) Recv() (*MarketResponse, error) {
+	m := new(MarketResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // MarketServer is the server API for Market service.
@@ -57,7 +80,7 @@ func (c *marketClient) Subscribe(ctx context.Context, in *MarketRequest, opts ..
 // for forward compatibility
 type MarketServer interface {
 	GetPrice(context.Context, *PriceRequest) (*PriceResponse, error)
-	Subscribe(context.Context, *MarketRequest) (*MarketResponse, error)
+	Subscribe(*MarketRequest, Market_SubscribeServer) error
 	mustEmbedUnimplementedMarketServer()
 }
 
@@ -68,8 +91,8 @@ type UnimplementedMarketServer struct {
 func (UnimplementedMarketServer) GetPrice(context.Context, *PriceRequest) (*PriceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPrice not implemented")
 }
-func (UnimplementedMarketServer) Subscribe(context.Context, *MarketRequest) (*MarketResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+func (UnimplementedMarketServer) Subscribe(*MarketRequest, Market_SubscribeServer) error {
+	return status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
 }
 func (UnimplementedMarketServer) mustEmbedUnimplementedMarketServer() {}
 
@@ -102,22 +125,25 @@ func _Market_GetPrice_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Market_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MarketRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Market_Subscribe_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(MarketRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(MarketServer).Subscribe(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/Market/Subscribe",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MarketServer).Subscribe(ctx, req.(*MarketRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(MarketServer).Subscribe(m, &marketSubscribeServer{stream})
+}
+
+type Market_SubscribeServer interface {
+	Send(*MarketResponse) error
+	grpc.ServerStream
+}
+
+type marketSubscribeServer struct {
+	grpc.ServerStream
+}
+
+func (x *marketSubscribeServer) Send(m *MarketResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 // Market_ServiceDesc is the grpc.ServiceDesc for Market service.
@@ -131,11 +157,13 @@ var Market_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetPrice",
 			Handler:    _Market_GetPrice_Handler,
 		},
+	},
+	Streams: []grpc.StreamDesc{
 		{
-			MethodName: "Subscribe",
-			Handler:    _Market_Subscribe_Handler,
+			StreamName:    "Subscribe",
+			Handler:       _Market_Subscribe_Handler,
+			ServerStreams: true,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
 	Metadata: "app/app-services/proto/market/v1/market.proto",
 }

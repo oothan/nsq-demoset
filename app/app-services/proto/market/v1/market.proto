@@ -34,5 +34,5 @@ message PriceResponse {
 
 service Market {
   rpc GetPrice(PriceRequest) returns (PriceResponse);
-  rpc Subscribe(MarketRequest) returns (MarketResponse);
+  rpc Subscribe(MarketRequest) returns (stream MarketResponse);
 }
