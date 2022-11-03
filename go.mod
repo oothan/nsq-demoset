@@ -9,6 +9,7 @@ require (
 	github.com/go-redis/redis/v9 v9.0.0-beta.2
 	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.3.0
+	github.com/gorilla/websocket v1.5.0
 	github.com/joho/godotenv v1.4.0
 	github.com/swaggo/swag v1.8.6
 	go.uber.org/zap v1.23.0
