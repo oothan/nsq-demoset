@@ -2,6 +2,7 @@ package model
 
 import (
 	"context"
+	"github.com/gorilla/websocket"
 	"gorm.io/gorm"
 	"nsq-demoset/app/app-services/cmd/front_api/criteria"
 	"time"
@@ -18,11 +19,13 @@ type User struct {
 	CreatedAt    time.Time      `gorm:"column:created_at" json:"created_at"`
 	UpdatedAt    time.Time      `gorm:"column:updated_at" json:"updated_at"`
 	DeletedAt    gorm.DeletedAt `json:"_"`
+
+	Conn map[string]*websocket.Conn `gorm:"-" json:"-"`
 }
 
 type UserService interface {
 	FindAll(ctx context.Context, crits criteria.Criteria) ([]*User, error)
-	FindById(ctx context.Context, userId string) (*User, error)
+	FindById(ctx context.Context, userId uint64) (*User, error)
 	FindByEmail(ctx context.Context, email string) (*User, error)
 	Create(ctx context.Context, user *User) (*User, error)
 	Update(ctx context.Context, user *User) (*User, error)
@@ -31,7 +34,7 @@ type UserService interface {
 
 type UserRepository interface {
 	FindAll(ctx context.Context, crits criteria.Criteria) ([]*User, error)
-	FindById(ctx context.Context, userId string) (*User, error)
+	FindById(ctx context.Context, userId uint64) (*User, error)
 	FindByEmail(ctx context.Context, email string) (*User, error)
 	Create(ctx context.Context, user *User) (*User, error)
 	Update(ctx context.Context, user *User) (*User, error)

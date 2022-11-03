@@ -30,7 +30,7 @@ func (r *userRepository) FindAll(ctx context.Context, crits criteria.Criteria) (
 	return users, nil
 }
 
-func (r *userRepository) FindById(ctx context.Context, userId string) (*model.User, error) {
+func (r *userRepository) FindById(ctx context.Context, userId uint64) (*model.User, error) {
 	user := &model.User{}
 
 	key := fmt.Sprintf("cache:user:%v", userId)

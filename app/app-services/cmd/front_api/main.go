@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -24,6 +25,13 @@ import (
 // @in header
 // @name Authorization
 func main() {
+
+	port := flag.String("port", "8001", "Default port is 8001")
+	mPort := flag.String("port", "8081", "Default port is 8081")
+
+	addr := fmt.Sprintf(":%s", *port)
+	mAddr := fmt.Sprintf(":%s", *mPort)
+
 	// load datasource
 	ds := _ds.NewDataSource()
 
@@ -31,20 +39,21 @@ func main() {
 	router := gin.Default()
 	//router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	h := handler.NewHandler(&handler.HConfig{
-		R:  router,
-		DS: ds,
+		R:             router,
+		DS:            ds,
+		MarketRPCAddr: mAddr,
 	})
 	h.Register()
 
 	server := http.Server{
-		Addr:    fmt.Sprintf(":%s", os.Getenv("APP_PORT")),
+		Addr:    addr,
 		Handler: h.R,
 	}
 
 	go func() {
-		logger.Sugar.Info("Server started listening on port: ", os.Getenv("APP_PORT"))
+		logger.Sugar.Info("Server started listening on port: ", *port)
 		if err := server.ListenAndServe(); err != nil {
-			logger.Sugar.Error("Failed to initialized server: ", err.Error())
+			logger.Sugar.Error("Failed to initialized server on port :", *port, " ", err.Error())
 		}
 	}()
 

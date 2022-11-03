@@ -15,11 +15,15 @@ type Handler struct {
 	userScv  model.UserService
 	tokenScv model.TokenService
 	postScv  model.PostService
+
+	marketService *service.MarketService
+	socketService *service.SocketService
 }
 
 type HConfig struct {
-	R  *gin.Engine
-	DS *ds.DataSource
+	R             *gin.Engine
+	DS            *ds.DataSource
+	MarketRPCAddr string
 }
 
 func NewHandler(c *HConfig) *Handler {
@@ -42,11 +46,22 @@ func NewHandler(c *HConfig) *Handler {
 		PostRepo: postRepo,
 	})
 
+	// market service
+	marketService := service.NewMarketService(c.MarketRPCAddr)
+
+	// socket service
+	socketService := service.NewSocketService(&service.SConfig{
+		MarketService: marketService,
+	})
+
 	return &Handler{
 		R:        c.R,
 		userScv:  userService,
 		tokenScv: tokenService,
 		postScv:  postService,
+
+		marketService: marketService,
+		socketService: socketService,
 	}
 }
 
@@ -65,5 +80,9 @@ func (h *Handler) Register() {
 	// post
 	postHandler := NewPostHandler(h)
 	postHandler.Register()
+
+	// web-socket
+	wsHandler := NewWSHandler(h)
+	wsHandler.Register()
 
 }

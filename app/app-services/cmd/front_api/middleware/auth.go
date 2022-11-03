@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"context"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"nsq-demoset/app/_applib/appresponse"
 	"nsq-demoset/app/_applib/utils"
@@ -54,7 +53,7 @@ func AuthMiddleware(userSvc model.UserService) gin.HandlerFunc {
 		ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)
 		defer cancel()
 
-		user, err := userSvc.FindById(ctx, fmt.Sprintf("%v", uid))
+		user, err := userSvc.FindById(ctx, uid)
 		if err != nil {
 			res.ErrCode = 403
 			res.ErrMsg = "Permission Denied"
