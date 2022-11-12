@@ -27,7 +27,8 @@ import (
 func main() {
 
 	port := flag.String("port", "8001", "Default port is 8001")
-	mPort := flag.String("port", "8081", "Default port is 8081")
+	mPort := flag.String("market", "8081", "Default port is 8081")
+	flag.Parse()
 
 	addr := fmt.Sprintf(":%s", *port)
 	mAddr := fmt.Sprintf(":%s", *mPort)
@@ -35,8 +36,10 @@ func main() {
 	// load datasource
 	ds := _ds.NewDataSource()
 
-	// server
+	//router
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
+	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	//router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	h := handler.NewHandler(&handler.HConfig{
 		R:             router,

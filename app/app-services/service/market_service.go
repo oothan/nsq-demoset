@@ -5,13 +5,13 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"nsq-demoset/app/app-services/model"
-	marketpb "nsq-demoset/app/app-services/proto/market/v1"
+	"nsq-demoset/app/app-services/proto/market/v1/pb"
 	"sync"
 )
 
 type MarketService struct {
 	mu       sync.RWMutex
-	client   marketpb.MarketClient
+	client   pb.MarketClient
 	CoinChan chan *model.CoinData
 }
 
@@ -35,11 +35,11 @@ func (s *MarketService) getData(addr string) {
 	}
 	defer conn.Close()
 
-	client := marketpb.NewMarketClient(conn)
+	client := pb.NewMarketClient(conn)
 	s.client = client
 
-	stream, err := client.Subscribe(context.Background(), &marketpb.MarketRequest{
-		Coin: marketpb.Coin_ALL,
+	stream, err := client.Subscribe(context.Background(), &pb.MarketRequest{
+		Coin: pb.Coin_ALL,
 	})
 	if err != nil {
 		panic(err)
@@ -61,6 +61,6 @@ func (s *MarketService) getData(addr string) {
 	}
 }
 
-func (s *MarketService) GetClient() marketpb.MarketClient {
+func (s *MarketService) GetClient() pb.MarketClient {
 	return s.client
 }

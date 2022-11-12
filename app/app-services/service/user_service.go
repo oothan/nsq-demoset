@@ -14,7 +14,7 @@ func (u *userService) FindAll(ctx context.Context, crits criteria.Criteria) ([]*
 	return u.UserRepo.FindAll(ctx, crits)
 }
 
-func (u *userService) FindById(ctx context.Context, userId string) (*model.User, error) {
+func (u *userService) FindById(ctx context.Context, userId uint64) (*model.User, error) {
 	return u.UserRepo.FindById(ctx, userId)
 }
 

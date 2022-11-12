@@ -8,7 +8,7 @@ import (
 	"net"
 	logger "nsq-demoset/app/_applib"
 	"nsq-demoset/app/app-services/cmd/market/server"
-	marketpb "nsq-demoset/app/app-services/proto/market/v1"
+	marketpb "nsq-demoset/app/app-services/proto/market/v1/pb"
 )
 
 func main() {

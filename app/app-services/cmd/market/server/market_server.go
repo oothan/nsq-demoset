@@ -8,13 +8,13 @@ import (
 	"io/ioutil"
 	"net/http"
 	"nsq-demoset/app/app-services/cmd/market/data"
-	marketpb "nsq-demoset/app/app-services/proto/market/v1"
+	"nsq-demoset/app/app-services/proto/market/v1/pb"
 	"time"
 )
 
 type MarketServer struct {
 	marketData *data.MarketData
-	marketpb.UnimplementedMarketServer
+	pb.UnimplementedMarketServer
 }
 
 func NewMarketServer() *MarketServer {
@@ -24,7 +24,7 @@ func NewMarketServer() *MarketServer {
 	}
 }
 
-func (s *MarketServer) Subscribe(in *marketpb.MarketRequest, stream marketpb.Market_SubscribeServer) error {
+func (s *MarketServer) Subscribe(in *pb.MarketRequest, stream pb.Market_SubscribeServer) error {
 	for {
 		select {
 		case <-stream.Context().Done():
@@ -32,7 +32,7 @@ func (s *MarketServer) Subscribe(in *marketpb.MarketRequest, stream marketpb.Mar
 		default:
 			time.Sleep(time.Second)
 			for key, val := range s.marketData.List {
-				err := stream.SendMsg(&marketpb.MarketResponse{
+				err := stream.SendMsg(&pb.MarketResponse{
 					Symbol:             key,
 					OpenPrice:          val.OpenPrice,
 					ClosePrice:         val.HighPrice,
@@ -53,7 +53,7 @@ type responseItem struct {
 	Price  string `json:"price"`
 }
 
-func (s *MarketServer) GetPrice(ctx context.Context, in *marketpb.PriceRequest) (*marketpb.PriceResponse, error) {
+func (s *MarketServer) GetPrice(ctx context.Context, in *pb.PriceRequest) (*pb.PriceResponse, error) {
 	resp, err := http.Get("https://api3.binance.com/api/v3/ticker/price")
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
@@ -75,7 +75,7 @@ func (s *MarketServer) GetPrice(ctx context.Context, in *marketpb.PriceRequest) 
 		return nil, status.Error(codes.NotFound, "Symbol not found")
 	}
 
-	return &marketpb.PriceResponse{
+	return &pb.PriceResponse{
 		Symbol: item.Symbol,
 		Price:  item.Price,
 	}, nil

@@ -43,7 +43,7 @@ func (s *MarketData) getData(addr string) {
 	u := url.URL{
 		Scheme: "wss",
 		Host:   addr,
-		Path:   "/wss",
+		Path:   "/ws",
 	}
 
 	conn, _, err := websocket.DefaultDialer.Dial(u.String(), nil)

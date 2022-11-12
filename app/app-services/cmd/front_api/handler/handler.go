@@ -53,6 +53,7 @@ func NewHandler(c *HConfig) *Handler {
 	socketService := service.NewSocketService(&service.SConfig{
 		MarketService: marketService,
 	})
+	go socketService.NotifyAll()
 
 	return &Handler{
 		R:        c.R,

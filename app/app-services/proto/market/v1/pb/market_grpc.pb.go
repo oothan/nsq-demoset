@@ -4,7 +4,7 @@
 // - protoc             v3.12.4
 // source: app/app-services/proto/market/v1/market.proto
 
-package marketpb
+package pb
 
 import (
 	context "context"
