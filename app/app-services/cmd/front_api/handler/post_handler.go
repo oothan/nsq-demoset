@@ -7,9 +7,8 @@ import (
 	"net/http"
 	"nsq-demoset/app/_applib"
 	logger "nsq-demoset/app/_applib"
-	"nsq-demoset/app/_applib/apprequest"
-	"nsq-demoset/app/_applib/appresponse"
 	"nsq-demoset/app/app-services/cmd/front_api/middleware"
+	"nsq-demoset/app/app-services/internal/dto"
 	"nsq-demoset/app/app-services/internal/model"
 )
 
@@ -36,11 +35,11 @@ func (ctr *postHandler) Register() {
 }
 
 func (ctr *postHandler) postView(c *gin.Context) {
-	res := &appresponse.ResponseObj{}
+	res := &dto.ResponseObj{}
 	user := c.MustGet("user").(*model.User)
 	logger.Sugar.Debug("UserId =========== ", user.Id)
 
-	req := apprequest.RequestPostView{}
+	req := dto.RequestPostView{}
 	if err := c.ShouldBind(&req); err != nil {
 		res.ErrCode = _applib.ErrorCode401
 		res.ErrMsg = err.Error()
@@ -58,7 +57,7 @@ func (ctr *postHandler) postView(c *gin.Context) {
 
 	bytes, err := json.Marshal(post)
 
-	postRes := appresponse.PostResponse{}
+	postRes := dto.PostResponse{}
 	if err := json.Unmarshal([]byte(bytes), &postRes); err != nil {
 		res.ErrCode = _applib.ErrorCode505
 		res.ErrMsg = err.Error()

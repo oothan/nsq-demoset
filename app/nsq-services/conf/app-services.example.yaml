@@ -23,3 +23,8 @@ rsa:
   public: "conf/rsa_public.pem"
   secret: ""
 
+# telegram
+telegram:
+  tokenID:  ""
+  groupID:  ""
+

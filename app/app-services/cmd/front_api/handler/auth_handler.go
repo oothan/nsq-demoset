@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"nsq-demoset/app/_applib/appresponse"
 	"nsq-demoset/app/app-services/cmd/front_api/middleware"
 	"nsq-demoset/app/app-services/conf"
 	"nsq-demoset/app/app-services/internal/ds"
+	"nsq-demoset/app/app-services/internal/dto"
 	"nsq-demoset/app/app-services/internal/model"
 	"nsq-demoset/app/app-services/internal/utils"
 )
@@ -60,7 +60,7 @@ func (ctr *authHandler) Register() {
 // @Produce json
 // @Router /api/auth/login [post]
 func (ctr *authHandler) postLogin(c *gin.Context) {
-	res := &appresponse.ResponseObj{}
+	res := &dto.ResponseObj{}
 	req := &reqPostLogin{}
 
 	if err := c.ShouldBind(&req); err != nil {
@@ -131,7 +131,7 @@ func (ctr *authHandler) postLogin(c *gin.Context) {
 // @Produce json
 // @Router /api/auth/register [post]
 func (ctr *authHandler) postRegister(c *gin.Context) {
-	res := &appresponse.ResponseObj{}
+	res := &dto.ResponseObj{}
 	req := &reqPostLogin{}
 
 	if err := c.ShouldBind(&req); err != nil {
@@ -178,7 +178,7 @@ func (ctr *authHandler) postRegister(c *gin.Context) {
 // @Produce json
 // @Router /api/auth/logout [post]
 func (ctr *authHandler) postLogout(c *gin.Context) {
-	res := &appresponse.ResponseObj{}
+	res := &dto.ResponseObj{}
 	user := c.MustGet("user").(*model.User)
 
 	req := &reqRefreshToken{}
@@ -223,7 +223,7 @@ func (ctr *authHandler) postLogout(c *gin.Context) {
 // @Produce json
 // @Router /api/auth/refresh [post]
 func (ctr *authHandler) postRefresh(c *gin.Context) {
-	res := &appresponse.ResponseObj{}
+	res := &dto.ResponseObj{}
 	user := c.MustGet("user").(*model.User)
 	ctx := c.Request.Context()
 
@@ -268,7 +268,7 @@ func (ctr *authHandler) postRefresh(c *gin.Context) {
 // @Produce json
 // @Router /api/auth/me [post]
 func (ctr *authHandler) getMe(c *gin.Context) {
-	res := &appresponse.ResponseObj{}
+	res := &dto.ResponseObj{}
 	user := c.MustGet("user").(*model.User)
 
 	res.ErrCode = 0

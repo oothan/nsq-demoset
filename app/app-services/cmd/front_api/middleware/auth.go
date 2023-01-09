@@ -3,8 +3,8 @@ package middleware
 import (
 	"context"
 	"github.com/gin-gonic/gin"
-	"nsq-demoset/app/_applib/appresponse"
 	"nsq-demoset/app/app-services/conf"
+	"nsq-demoset/app/app-services/internal/dto"
 	"nsq-demoset/app/app-services/internal/model"
 	"nsq-demoset/app/app-services/internal/utils"
 	"strings"
@@ -18,7 +18,7 @@ type authHeader struct {
 func AuthMiddleware(userSvc model.UserService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		h := authHeader{}
-		res := &appresponse.ResponseObj{}
+		res := &dto.ResponseObj{}
 
 		// bind Authorization Header to h and check for validation errors
 		if err := c.ShouldBindHeader(&h); err != nil {

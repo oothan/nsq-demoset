@@ -4,7 +4,6 @@ import (
 	"crypto/rsa"
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/joho/godotenv"
-	"io/ioutil"
 	logger "nsq-demoset/app/_applib"
 	"os"
 )
@@ -30,13 +29,13 @@ func init() {
 		logger.Sugar.Error("Error on creating directory logs: ", err)
 	}*/
 
-	err = godotenv.Load(dir + "conf/.env")
+	err = godotenv.Load(dir + "/conf/.env")
 	if err != nil {
 		logger.Sugar.Error("error on getting directory : ", err)
 	}
 
 	// Load rsa [private]
-	privateBytes, err := ioutil.ReadFile(os.Getenv("RSA_PRIVATE"))
+	privateBytes, err := os.ReadFile(os.Getenv("RSA_PRIVATE"))
 	if err != nil {
 		logger.Sugar.Error("Error on loading private key: ", err)
 	}
@@ -48,7 +47,7 @@ func init() {
 	PrivateKey = privateKey
 
 	// Load rsa [public]
-	publicBytes, err := ioutil.ReadFile(os.Getenv("RSA_PUBLIC"))
+	publicBytes, err := os.ReadFile(os.Getenv("RSA_PUBLIC"))
 	if err != nil {
 		logger.Sugar.Error("Error on loading public key: ", err)
 	}

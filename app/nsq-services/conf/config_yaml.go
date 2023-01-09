@@ -3,6 +3,7 @@ package conf
 import (
 	"fmt"
 	"gopkg.in/yaml.v2"
+	logger "nsq-demoset/app/_applib"
 	"os"
 )
 
@@ -22,23 +23,29 @@ type (
 		Password string `yaml:"password"`
 	}
 
-	nsq struct {
+	nsq_ struct {
 		Addr string `yaml:"addr"`
 	}
 
-	rsa struct {
+	rsa_ struct {
 		Private string `yaml:"private"`
 		Public  string `yaml:"public"`
 		Secret  string `yaml:"secret"`
+	}
+
+	telegram struct {
+		TokenID string `yaml:"tokenID"`
+		GroupID string `yaml:"groupID"`
 	}
 )
 
 var (
 	_c struct {
-		Mysql mysql `yaml:"mysql"`
-		Redis redis `yaml:"redis"`
-		Nsq   nsq   `yaml:"nsq"`
-		Rsa   rsa   `yaml:"rsa"`
+		Mysql    mysql    `yaml:"mysql"`
+		Redis    redis    `yaml:"redis"`
+		Nsq      nsq_     `yaml:"nsq"`
+		Rsa      rsa_     `yaml:"rsa"`
+		Telegram telegram `yaml:"telegram"`
 	}
 )
 
@@ -48,7 +55,8 @@ func InitYaml() {
 		panic(err)
 	}
 
-	if err := yaml.Unmarshal(data, _c); err != nil {
+	if err := yaml.Unmarshal(data, &_c); err != nil {
+		logger.Sugar.Error(err)
 		panic(err)
 	}
 }
@@ -68,10 +76,14 @@ func Redis() *redis {
 	return &_c.Redis
 }
 
-func Nsq() *nsq {
+func Nsq() *nsq_ {
 	return &_c.Nsq
 }
 
-func RSA() *rsa {
+func RSA() *rsa_ {
 	return &_c.Rsa
+}
+
+func Telegram() *telegram {
+	return &_c.Telegram
 }

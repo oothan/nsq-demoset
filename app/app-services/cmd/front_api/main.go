@@ -3,10 +3,11 @@ package main
 import (
 	"context"
 	"flag"
-	"fmt"
 	"github.com/gin-gonic/gin"
+	"net"
 	"net/http"
 	logger "nsq-demoset/app/_applib"
+	libnsq "nsq-demoset/app/_applib/nsq"
 	_ "nsq-demoset/app/app-services/cmd/front_api/docs"
 	"nsq-demoset/app/app-services/cmd/front_api/handler"
 	"nsq-demoset/app/app-services/internal/ds"
@@ -30,8 +31,12 @@ func main() {
 	mPort := flag.String("market", "8081", "Default port is 8081")
 	flag.Parse()
 
-	addr := fmt.Sprintf(":%s", *port)
-	mAddr := fmt.Sprintf(":%s", *mPort)
+	//addr := fmt.Sprintf(":%s", *port)
+	//mAddr := fmt.Sprintf(":%s", *mPort)
+	addr := net.JoinHostPort("", *port)
+	mAddr := net.JoinHostPort("", *mPort)
+
+	libnsq.InitNSQProducer()
 
 	// load datasource
 	ds := ds.NewDataSource()
