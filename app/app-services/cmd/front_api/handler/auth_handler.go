@@ -5,11 +5,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"nsq-demoset/app/_applib/appresponse"
-	"nsq-demoset/app/_applib/utils"
 	"nsq-demoset/app/app-services/cmd/front_api/middleware"
 	"nsq-demoset/app/app-services/conf"
-	"nsq-demoset/app/app-services/model"
-	"nsq-demoset/app/nsq-services/ds"
+	"nsq-demoset/app/app-services/internal/ds"
+	"nsq-demoset/app/app-services/internal/model"
+	"nsq-demoset/app/app-services/internal/utils"
 )
 
 type authHandler struct {

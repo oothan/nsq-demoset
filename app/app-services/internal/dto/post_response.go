@@ -1,4 +1,4 @@
-package appresponse
+package dto
 
 type PostResponse struct {
 	Id           uint64 `json:"id"`

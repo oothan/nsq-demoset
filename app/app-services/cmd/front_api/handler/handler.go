@@ -3,10 +3,10 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"nsq-demoset/app/app-services/cmd/front_api/middleware"
-	"nsq-demoset/app/app-services/ds"
-	"nsq-demoset/app/app-services/model"
-	"nsq-demoset/app/app-services/repository"
-	"nsq-demoset/app/app-services/service"
+	"nsq-demoset/app/app-services/internal/ds"
+	"nsq-demoset/app/app-services/internal/model"
+	"nsq-demoset/app/app-services/internal/repository"
+	"nsq-demoset/app/app-services/internal/service"
 )
 
 type Handler struct {

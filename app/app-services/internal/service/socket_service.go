@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/gorilla/websocket"
 	logger "nsq-demoset/app/_applib"
-	"nsq-demoset/app/app-services/model"
+	"nsq-demoset/app/app-services/internal/model"
 	"sync"
 )
 

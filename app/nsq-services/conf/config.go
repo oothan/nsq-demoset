@@ -2,7 +2,6 @@ package conf
 
 import (
 	"crypto/rsa"
-	"fmt"
 	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/joho/godotenv"
 	"io/ioutil"
@@ -24,12 +23,12 @@ func init() {
 		logger.Sugar.Error("Error on getting directory : ", err.Error())
 	}
 
-	// logs create directory
+	/*// logs create directory
 	if err = os.MkdirAll(fmt.Sprintf("%s/logs", dir), 0755); err != nil {
 		logger.Sugar.Error("Error on creating directory logs: ", err)
-	}
+	}*/
 
-	err = godotenv.Load("conf/.env")
+	err = godotenv.Load(dir + "conf/.env")
 	if err != nil {
 		logger.Sugar.Error("error on getting directory : ", err)
 	}

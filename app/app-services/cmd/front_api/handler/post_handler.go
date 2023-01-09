@@ -10,7 +10,7 @@ import (
 	"nsq-demoset/app/_applib/apprequest"
 	"nsq-demoset/app/_applib/appresponse"
 	"nsq-demoset/app/app-services/cmd/front_api/middleware"
-	"nsq-demoset/app/app-services/model"
+	"nsq-demoset/app/app-services/internal/model"
 )
 
 type postHandler struct {

@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"nsq-demoset/app/app-services/cmd/front_api/criteria"
-	"nsq-demoset/app/app-services/model"
+	"nsq-demoset/app/app-services/internal/model"
 )
 
 type userService struct {

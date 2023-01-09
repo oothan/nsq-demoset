@@ -4,8 +4,8 @@ import (
 	"context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"nsq-demoset/app/app-services/model"
-	"nsq-demoset/app/app-services/proto/market/v1/pb"
+	"nsq-demoset/app/app-services/internal/model"
+	"nsq-demoset/app/app-services/internal/proto/market/v1/pb"
 	"sync"
 )
 

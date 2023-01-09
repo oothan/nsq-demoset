@@ -8,8 +8,8 @@ import (
 	"gorm.io/gorm"
 	logger "nsq-demoset/app/_applib"
 	"nsq-demoset/app/app-services/cmd/front_api/criteria"
-	"nsq-demoset/app/app-services/ds"
-	"nsq-demoset/app/app-services/model"
+	"nsq-demoset/app/app-services/internal/ds"
+	"nsq-demoset/app/app-services/internal/model"
 	"time"
 )
 

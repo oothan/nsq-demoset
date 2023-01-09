@@ -8,10 +8,10 @@ import (
 	"github.com/gorilla/websocket"
 	"net/http"
 	logger "nsq-demoset/app/_applib"
-	"nsq-demoset/app/_applib/utils"
 	"nsq-demoset/app/app-services/conf"
-	"nsq-demoset/app/app-services/model"
-	"nsq-demoset/app/app-services/service"
+	"nsq-demoset/app/app-services/internal/model"
+	"nsq-demoset/app/app-services/internal/service"
+	"nsq-demoset/app/app-services/internal/utils"
 	"time"
 )
 

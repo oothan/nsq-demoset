@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"nsq-demoset/app/app-services/cmd/market/data"
-	"nsq-demoset/app/app-services/proto/market/v1/pb"
+	"nsq-demoset/app/app-services/internal/proto/market/v1/pb"
 	"time"
 )
 

@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-redis/redis/v9"
-	"nsq-demoset/app/app-services/ds"
-	"nsq-demoset/app/app-services/model"
+	"nsq-demoset/app/app-services/internal/ds"
+	"nsq-demoset/app/app-services/internal/model"
 )
 
 type tokenRepository struct {

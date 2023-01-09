@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
-	"nsq-demoset/app/_applib/utils"
 	"nsq-demoset/app/app-services/conf"
-	"nsq-demoset/app/app-services/model"
+	"nsq-demoset/app/app-services/internal/model"
+	"nsq-demoset/app/app-services/internal/utils"
 )
 
 type tokenService struct {

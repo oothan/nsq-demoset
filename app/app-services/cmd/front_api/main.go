@@ -9,7 +9,7 @@ import (
 	logger "nsq-demoset/app/_applib"
 	_ "nsq-demoset/app/app-services/cmd/front_api/docs"
 	"nsq-demoset/app/app-services/cmd/front_api/handler"
-	_ds "nsq-demoset/app/app-services/ds"
+	"nsq-demoset/app/app-services/internal/ds"
 	"os"
 	"os/signal"
 	"syscall"
@@ -34,7 +34,7 @@ func main() {
 	mAddr := fmt.Sprintf(":%s", *mPort)
 
 	// load datasource
-	ds := _ds.NewDataSource()
+	ds := ds.NewDataSource()
 
 	//router
 	gin.SetMode(gin.ReleaseMode)

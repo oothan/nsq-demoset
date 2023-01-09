@@ -1,7 +1,7 @@
-package appresponse
+package dto
 
 import (
-	"nsq-demoset/app/app-services/model"
+	"nsq-demoset/app/app-services/internal/model"
 	"time"
 )
 
