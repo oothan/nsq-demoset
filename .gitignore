@@ -12,4 +12,6 @@
 /logs/appnsq.log
 /logs/appsvc.log
 
+/app/app-services/conf/app-services.yaml
+
 I want to fork from me

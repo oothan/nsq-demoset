@@ -12,16 +12,17 @@ func NewNsqConsumer(addr, topic, channel string, handel func(message *gonsq.Mess
 
 	consumer, err := gonsq.NewConsumer(topic, channel, config)
 	if err != nil {
-		logger.Sugar.Error("NSQ Consumer err : ", err)
+		logger.Sugar.Errorf("NSQ Consumer err: %v", err)
+		panic(err)
+	}
+	consumer.AddHandler(gonsq.HandlerFunc(handel))
+	//consumer.AddConcurrentHandlers(gonsq.HandlerFunc(handel), concurrency)
+
+	err = consumer.ConnectToNSQD(addr)
+	if err != nil {
+		logger.Sugar.Errorf("NSQD Connect err: %v", err)
 		panic(err)
 	}
 
-	consumer.AddHandler(gonsq.HandlerFunc(handel))
-	//consumer.AddConcurrentHandlers(gonsq.HandlerFunc(handel), concurrency)
-	err = consumer.ConnectToNSQD(addr)
-	if err != nil {
-		logger.Sugar.Error("NSQD connect err : ", err)
-		panic(err)
-	}
 	return nil
 }

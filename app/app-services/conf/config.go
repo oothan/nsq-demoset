@@ -14,6 +14,8 @@ var (
 	PublicKey     *rsa.PublicKey
 	RefreshSecret string
 	AppHost       string
+
+	NsqAddr string
 )
 
 func init() {
@@ -62,5 +64,7 @@ func init() {
 
 	// App host
 	AppHost = os.Getenv("APP_DOMAIN")
+
+	NsqAddr = os.Getenv("NSQ_ADDR")
 
 }
