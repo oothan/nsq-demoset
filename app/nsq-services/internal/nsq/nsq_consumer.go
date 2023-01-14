@@ -6,7 +6,7 @@ import (
 	gonsq "github.com/nsqio/go-nsq"
 	logger "nsq-demoset/app/_applib"
 	"nsq-demoset/app/_applib/nsq"
-	"nsq-demoset/app/nsq-services/conf"
+	"nsq-demoset/app/conf"
 	"nsq-demoset/app/nsq-services/internal/services"
 )
 
