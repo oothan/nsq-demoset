@@ -4,8 +4,7 @@ import (
 	"log"
 	logger "nsq-demoset/app/_applib"
 	libnsq "nsq-demoset/app/_applib/nsq"
-	"nsq-demoset/app/nsq-services/conf"
-	_ "nsq-demoset/app/nsq-services/conf"
+	"nsq-demoset/app/conf"
 	"nsq-demoset/app/nsq-services/internal/nsq"
 	"nsq-demoset/app/nsq-services/internal/services"
 )

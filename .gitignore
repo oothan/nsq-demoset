@@ -5,14 +5,14 @@
 /app/app-services/conf/rsa_private.pem
 /app/app-services/conf/rsa_public.pem
 
-/app/nsq-services/conf/.env
-/app/nsq-services/conf/rsa_private.pem
-/app/nsq-services/conf/rsa_public.pem
+/app/conf/.env
+/app/conf/rsa_private.pem
+/app/conf/rsa_public.pem
 
 /logs/appnsq.log
 /logs/appsvc.log
 
 /app/app-services/conf/app-services.yaml
-/app/nsq-services/conf/app-services.yaml
+/app/conf/app-services.yaml
 
 I want to fork from me
