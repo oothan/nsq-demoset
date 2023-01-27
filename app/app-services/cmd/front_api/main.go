@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	logger "nsq-demoset/app/_applib"
+	libkafka "nsq-demoset/app/_applib/kafka"
 	libnsq "nsq-demoset/app/_applib/nsq"
 	_ "nsq-demoset/app/app-services/cmd/front_api/docs"
 	"nsq-demoset/app/app-services/cmd/front_api/handler"
@@ -37,6 +38,7 @@ func main() {
 	mAddr := net.JoinHostPort("", *mPort)
 
 	libnsq.InitNSQProducer()
+	libkafka.InitKafkaProducer()
 
 	// load datasource
 	ds := ds.NewDataSource()

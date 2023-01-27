@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	libkafka "nsq-demoset/app/_applib/kafka"
 	"nsq-demoset/app/app-services/cmd/front_api/middleware"
 	"nsq-demoset/app/app-services/conf"
 	"nsq-demoset/app/app-services/internal/ds"
@@ -42,11 +43,35 @@ func (ctr *authHandler) Register() {
 	group.POST("/login", ctr.postLogin)
 	group.POST("/register", ctr.postRegister)
 
+	group.POST("/test-kafka", ctr.testKafka)
+
 	// auth
 	group.Use(middleware.AuthMiddleware(ctr.UserSvc))
 	group.POST("/logout", ctr.postLogout)
 	group.POST("/refresh", ctr.postRefresh)
 	group.POST("/me", ctr.getMe)
+}
+
+type TestKafka struct {
+	Message string `json:"message"`
+}
+
+func (ctr *authHandler) testKafka(c *gin.Context) {
+	res := &dto.ResponseObj{}
+	req := &TestKafka{}
+	if err := c.ShouldBind(&req); err != nil {
+		res.ErrCode = 422
+		res.ErrMsg = err.Error()
+		c.JSON(422, res)
+		return
+	}
+
+	libkafka.TestKafkaMessageEvent(req.Message)
+
+	res.ErrCode = 0
+	res.ErrMsg = "Success"
+	c.JSON(200, res)
+
 }
 
 // PingExample godoc
